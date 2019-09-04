@@ -15,6 +15,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import precision_recall_fscore_support
 from sklearn.metrics import classification_report
 from sklearn.model_selection import GridSearchCV
+from sklearn.externals import joblib
+
+# configure libraries
+stop_words = nltk.corpus.stopwords.words("english")
+stop_words.append('us')
+stop_words.append('000')
+stop_words.append('http')
 
 
 def load_data(database_filepath):
@@ -29,7 +36,7 @@ def load_data(database_filepath):
     Y: Target dataframe
     category_names: A list of names for target labels 
     """
-    engine = create_engine('sqlite:///database_filepath')
+    engine = create_engine('sqlite:///' + database_filepath)
     df = pd.read_sql_table('Message', con=engine)
     X = df['message']
     Y = df.drop(['message', 'genre', 'id', 'original'], axis=1)
@@ -116,7 +123,7 @@ def save_model(model, model_filepath):
     Model: Final trained model to be stored
     Model_filepath: Filepath to save the model as
     """
-    pickle.dump(cv, open('model.pkl', 'wb'))
+    joblib.dump(cv,  'model.pkl', compress=3)
 
 
 
