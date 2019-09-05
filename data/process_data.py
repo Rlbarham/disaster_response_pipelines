@@ -73,10 +73,10 @@ def save_data(df, database_filename):
     """
 
     # create a sqlite database 
-    engine = create_engine('sqlite:///Messages.db')
+    engine = create_engine('sqlite:///' + database_filename)
 
     # transfer dataframe into sqlite database
-    df.to_sql('disaster_messages', engine, index=False, if_exists='replace')
+    df.to_sql('Message', engine, index=False, if_exists='replace')
     
 
 

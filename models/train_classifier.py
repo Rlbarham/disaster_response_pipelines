@@ -123,7 +123,7 @@ def save_model(model, model_filepath):
     Model: Final trained model to be stored
     Model_filepath: Filepath to save the model as
     """
-    joblib.dump(model,  'model.pkl', compress=3)
+    joblib.dump(model,  model_filepath, compress=3)
 
 
 
