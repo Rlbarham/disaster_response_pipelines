@@ -43,7 +43,10 @@ To do this, the project draws on some underlying ETL and ML pipelines that were 
 
 Running the application is simple.
 
-To run the ETL pipelines and ML pipelines, use process_data.py and train_classifier.py respectively.
+To run the ETL pipelines and ML pipelines, use the following commands from the root directory.
+
+python data/process_data.py data/disaster_messages.csv data/disaster_categories.csv data/DisasterResponse.db
+python models/train_classifier.py notebooks/DisasterResponse.db models/model.pkl
 
 To run the live application, run 'python run.py' in the relevant directory. Once the application has loaded on a local server, visit the relevant URL (by default http://0.0.0.0:3001/)
 
