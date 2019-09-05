@@ -95,13 +95,13 @@ def evaluate_model(model, X_test, Y_test, category_names):
     Y_test: target variables for the test
     category_names: category labels
     """
-    y_pred = pipeline.predict(X_test)
+    y_pred = model.predict(X_test)
     
     output_df = pd.DataFrame(columns=['Category', 'Precision', 'Recall', 'F1_Score'])    
     cat_list = category_names
     tracker = 0
     for item in cat_list:
-        precision, recall, f1_score, support = precision_recall_fscore_support(y_test[item], y_pred[:,tracker], average='weighted')
+        precision, recall, f1_score, support = precision_recall_fscore_support(Y_test[item], y_pred[:,tracker], average='weighted')
         output_df.at[tracker+1, 'Category'] = item
         output_df.at[tracker+1, 'Precision'] = precision
         output_df.at[tracker+1, 'Recall'] = recall
@@ -123,7 +123,7 @@ def save_model(model, model_filepath):
     Model: Final trained model to be stored
     Model_filepath: Filepath to save the model as
     """
-    joblib.dump(cv,  'model.pkl', compress=3)
+    joblib.dump(model,  'model.pkl', compress=3)
 
 
 
